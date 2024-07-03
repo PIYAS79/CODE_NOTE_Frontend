@@ -1,24 +1,25 @@
-import {createBrowserRouter} from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import RootPage from '../pages/RootPage';
 import HomePage from '../pages/HomePage';
-import { adminRouter } from './router.admin';
+import generateRoutes from '../utils/generateRoutes';
+import { adminRoutes } from './router.admin';
 
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <RootPage/>,
-        children:[
+        element: <RootPage />,
+        children: [
             {
-                index:true,
-                element: <HomePage/>
+                index: true,
+                element: <HomePage />
             }
         ]
     },
     {
-        path:'/admin',
-        element:<RootPage/>,
-        children: adminRouter
+        path: '/admin',
+        element: <RootPage />,
+        children: generateRoutes(adminRoutes)
     }
 ])
 
