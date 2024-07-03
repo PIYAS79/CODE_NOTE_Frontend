@@ -1,6 +1,4 @@
-import { NavLink } from "react-router-dom";
 import AdminDashboard from "../pages/admin/AdminDashboard";
-import { ReactNode } from 'react'
 import CreateStudent from "../pages/student/CreateStudent";
 import CreateFaculty from "../pages/faculty/CreateFaculty";
 

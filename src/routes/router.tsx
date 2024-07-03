@@ -3,6 +3,7 @@ import RootPage from '../pages/RootPage';
 import HomePage from '../pages/HomePage';
 import generateRoutes from '../utils/generateRoutes';
 import { adminRoutes } from './router.admin';
+import Login from '../pages/Login';
 
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
         path: '/admin',
         element: <RootPage />,
         children: generateRoutes(adminRoutes)
+    },
+    {
+        path:'/login',
+        element:<Login/>
     }
 ])
 

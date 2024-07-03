@@ -1,28 +1,13 @@
-import { Layout, Menu } from "antd";
-const { Sider, Header, Content, Footer } = Layout;
-import { NavLink, Outlet } from 'react-router-dom'
-import { adminRoute_sidebar } from "../routes/router.admin";
+import { Layout } from "antd";
+const { Header, Content, Footer } = Layout;
+import { Outlet } from 'react-router-dom'
+
+import Sidebar from "./Sidebar";
 
 const MainLayouts = () => {
     return (
         <Layout style={{ height: "100vh" }}>
-            <Sider
-                breakpoint="lg"
-                collapsedWidth="0"
-                onBreakpoint={(broken) => {
-                    console.log(broken);
-                }}
-                onCollapse={(collapsed, type) => {
-                    console.log(collapsed, type);
-                }}
-            >
-                <div className="demo-logo-vertical" >
-                    <NavLink to={'/'}>
-                        <h2 style={{ color: 'white', fontWeight: 'bold', padding: '1.11rem 0rem', textAlign: 'center', backgroundColor: 'gray' }}>CODE_NOTE</h2>
-                    </NavLink>
-                </div>
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={adminRoute_sidebar} />
-            </Sider>
+            <Sidebar />
             <Layout>
                 <Header style={{ padding: 0 }}>
                     <h2 style={{ color: 'white', textAlign: 'center' }}>Daffodil International Univeristy</h2>
