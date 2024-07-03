@@ -1,32 +1,48 @@
+import { Button, Form, Input } from 'antd';
 import {useState,FormEvent} from 'react';
+import { useUserLoginMutation } from '../redux/api/authApi';
+import { decodeJWTtoken } from '../utils/decodeToken';
+import { useAppDispatch } from '../redux/hooks';
+import { setUser } from '../redux/features/auth/authSlice';
 
 const Login = () => {
+    const [id,setId] = useState('0001')
+    const [password,setPassword] = useState('admin12345')
+    const dispatch = useAppDispatch();
 
-    const [id,setId] = useState('')
-    const [pass,setPass] = useState('')
+    const [login,{isLoading}] = useUserLoginMutation()
+    if(isLoading){
+        return <p>loading.....</p>
+    }
 
-    const handleSubmit=(event:FormEvent<HTMLFormElement>)=>{
+    const handleSubmit=async(event:FormEvent<HTMLFormElement>)=>{
         event.preventDefault();
-        console.log({id,pass});
-
-        setId('')
-        setPass('')
+        const res = await login({id,password}).unwrap();
+        const user = decodeJWTtoken(res.data.accessToken);
+        dispatch(setUser({user,token:res.data.accessToken}));
     }
 
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form style={{maxWidth:'500px',padding:'2rem',backgroundColor:'gray'}} onSubmitCapture={handleSubmit}>
         <h1>User Login </h1>
-        <input onChange={e=>{setId(e.target.value)}} value={id} type="text"placeholder="Enter your id" />
+        <Input onChange={e=>setId(e.target.value)} value={id} type="text"placeholder="Enter your id" />
         <br />
         <br />
-        <input onChange={e=>{setPass(e.target.value)}} value={pass} type="text"placeholder="Enter your pass" />
+        <Input onChange={e=>setPassword(e.target.value)} value={password} type="text"placeholder="Enter your pass" />
         <br />
         <br />
-        <button type='submit'>login</button>
-    </form>
+        <Button htmlType='submit'>login</Button>
+    </Form>
   )
 }
 
 export default Login
+
+
+/**
+ * router set up
+ * baseapi and authapi inject end point
+ * api call and set data from baseapi
+ */
