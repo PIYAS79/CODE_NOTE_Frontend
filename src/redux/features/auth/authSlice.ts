@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 type InitialState_Type = {
     user: null | object,
-    token: null | object
+    token: null | string
 }
 const initialState: InitialState_Type = {
     user: null,
